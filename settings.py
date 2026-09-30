@@ -878,8 +878,23 @@ class AnkiBioticSettingsDialog(QDialog):
         layout.setSpacing(12)
         layout.setContentsMargins(14, 14, 14, 14)
 
+        # Badges Display Controls
+        grp_display = QGroupBox("🎛️ خيارات عرض الشارات في لوحة التحكم الرئيسية")
+        form_display = QVBoxLayout(grp_display)
+        form_display.setSpacing(8)
+
+        self.chk_show_badges = QCheckBox("إظهار قسم الشارات والإنجازات في الصفحة الرئيسية (Show Badges)")
+        self.chk_show_badges.setChecked(bool(self.cfg.get("show_badges", True)))
+        form_display.addWidget(self.chk_show_badges)
+
+        self.chk_badges_default_collapsed = QCheckBox("طي قسم الشارات والإنجازات افتراضياً لتوفير المساحة (Collapse by Default)")
+        self.chk_badges_default_collapsed.setChecked(bool(self.cfg.get("badges_default_collapsed", True)))
+        form_display.addWidget(self.chk_badges_default_collapsed)
+
+        layout.addWidget(grp_display)
+
         lbl_info = QLabel("استعرض الشارات والإنجازات التي حققتها بناءً على استمراريتك ومعدل مراجعاتك:")
-        lbl_info.setStyleSheet("font-size: 12px; font-weight: 700;")
+        lbl_info.setStyleSheet("font-size: 12px; font-weight: 700; margin-top: 4px;")
         layout.addWidget(lbl_info)
 
         scroll = QScrollArea()
@@ -1185,9 +1200,11 @@ class AnkiBioticSettingsDialog(QDialog):
         self.cfg["show_stat_pace"] = self.chk_stat_pace.isChecked()
         self.cfg["show_stat_time"] = self.chk_stat_time.isChecked()
 
-        # Layout & Decks
+        # Layout & Decks & Badges
         self.cfg["decks_default_collapsed"] = self.chk_collapse_decks.isChecked()
         self.cfg["show_quick_nav"] = self.chk_quick_nav.isChecked()
+        self.cfg["show_badges"] = self.chk_show_badges.isChecked()
+        self.cfg["badges_default_collapsed"] = self.chk_badges_default_collapsed.isChecked()
 
         save_config(self.cfg)
         self.accept()

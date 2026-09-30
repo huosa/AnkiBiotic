@@ -19,6 +19,12 @@ LIGHT_THEMES = {
     "nordic_slate": "📖 ورق اسكندنافي",
     "surgical_blue": "🏥 أزرق جراحي (Surgical)",
     "scrub_green": "🩺 أخضر السكرابز (Scrubs)",
+    "citrus_dawn": "🍊 إشراقة الصباح (Citrus Dawn)",
+    "matcha_tea": "🍵 ماتشا هادئة (Matcha Serenity)",
+    "golden_parchment": "📜 مخطوطة أندلسية (Parchment)",
+    "ocean_breeze": "⛵ نسيم البحر (Ocean Breeze)",
+    "lilac_blossom": "🪻 ليلك ناعم (Lilac Blossom)",
+    "stethoscope_teal": "🩺 تركواز سريري (Clinical Teal)",
 }
 
 # Night / Dark Mode Themes (🌙 الوضع الليلي)
@@ -34,6 +40,12 @@ DARK_THEMES = {
     "cyber_emerald": "⚡ زمردي سايبر",
     "sandstorm": "🏜️ عاصفة رملية",
     "ecg_pulse": "🫀 نبضات القلب (ECG Pulse)",
+    "oled_black": "🖤 سواد تام (OLED True Black)",
+    "crimson_velvet": "🍷 مخمل ياقوتي (Crimson Velvet)",
+    "dracula_vamp": "🧛 دراكولا القوطي (Dracula Night)",
+    "amber_glow": "🕯️ توهج العنبر (Warm Amber)",
+    "nebula_cosmic": "🌌 سديم كوني (Cosmic Nebula)",
+    "synthwave_neon": "🌆 سينثويف نيون (Synthwave 80s)",
 }
 
 # Combined dictionary for backward compatibility
@@ -90,6 +102,36 @@ THEME_PALETTES: Dict[str, Dict[str, str]] = {
         "bg": "#edf6f3", "card_bg": "#ffffff", "card_inset": "#dff0ea",
         "border": "#b0d8c8", "fg": "#123326", "fg_muted": "#467360",
         "accent": "#189a6c", "accent_hover": "#22b580", "gold": "#10b981"
+    },
+    "citrus_dawn": {
+        "bg": "#fdf6ed", "card_bg": "#ffffff", "card_inset": "#faebda",
+        "border": "#f0ceaa", "fg": "#381e08", "fg_muted": "#8a5a2e",
+        "accent": "#e06d10", "accent_hover": "#f58226", "gold": "#f59e0b"
+    },
+    "matcha_tea": {
+        "bg": "#f2f6ee", "card_bg": "#ffffff", "card_inset": "#e6eee0",
+        "border": "#c6d8bc", "fg": "#1b3014", "fg_muted": "#526e48",
+        "accent": "#4a7c36", "accent_hover": "#5f9c47", "gold": "#84cc16"
+    },
+    "golden_parchment": {
+        "bg": "#faf4e8", "card_bg": "#fffdf9", "card_inset": "#f2e8d3",
+        "border": "#d8c59e", "fg": "#342814", "fg_muted": "#7d6844",
+        "accent": "#b3822a", "accent_hover": "#cfa043", "gold": "#d97706"
+    },
+    "ocean_breeze": {
+        "bg": "#edf7f9", "card_bg": "#ffffff", "card_inset": "#ddf0f4",
+        "border": "#b2dde6", "fg": "#0d2c33", "fg_muted": "#46747e",
+        "accent": "#0891b2", "accent_hover": "#06b6d4", "gold": "#0284c7"
+    },
+    "lilac_blossom": {
+        "bg": "#f8f4fb", "card_bg": "#ffffff", "card_inset": "#f0e6f6",
+        "border": "#d9c0e6", "fg": "#2e1438", "fg_muted": "#70487d",
+        "accent": "#9333ea", "accent_hover": "#a855f7", "gold": "#c084fc"
+    },
+    "stethoscope_teal": {
+        "bg": "#ecfdf5", "card_bg": "#ffffff", "card_inset": "#d1fae5",
+        "border": "#a7f3d0", "fg": "#064e3b", "fg_muted": "#047857",
+        "accent": "#059669", "accent_hover": "#10b981", "gold": "#14b8a6"
     },
 
     # ── Night Modes (🌙 الوضع الليلي) ──
@@ -148,11 +190,41 @@ THEME_PALETTES: Dict[str, Dict[str, str]] = {
         "border": "#223340", "fg": "#e6f4f8", "fg_muted": "#6b8f9e",
         "accent": "#00e5a3", "accent_hover": "#2bffa8", "gold": "#ff4d6d"
     },
+    "oled_black": {
+        "bg": "#000000", "card_bg": "#0a0a0a", "card_inset": "#141414",
+        "border": "#262626", "fg": "#ffffff", "fg_muted": "#888888",
+        "accent": "#00e5ff", "accent_hover": "#33ebff", "gold": "#ffd600"
+    },
+    "crimson_velvet": {
+        "bg": "#14080a", "card_bg": "#1c0d10", "card_inset": "#281418",
+        "border": "#481e26", "fg": "#fae8ea", "fg_muted": "#ba848b",
+        "accent": "#e11d48", "accent_hover": "#f43f5e", "gold": "#fbbf24"
+    },
+    "dracula_vamp": {
+        "bg": "#1e1f29", "card_bg": "#282a36", "card_inset": "#343746",
+        "border": "#44475a", "fg": "#f8f8f2", "fg_muted": "#a0a4bd",
+        "accent": "#ff79c6", "accent_hover": "#ff92d0", "gold": "#bd93f9"
+    },
+    "amber_glow": {
+        "bg": "#120e0a", "card_bg": "#1a140e", "card_inset": "#251c14",
+        "border": "#423222", "fg": "#fef3c7", "fg_muted": "#bba078",
+        "accent": "#f59e0b", "accent_hover": "#fbbf24", "gold": "#fbbf24"
+    },
+    "nebula_cosmic": {
+        "bg": "#0c071e", "card_bg": "#130c2c", "card_inset": "#1c123d",
+        "border": "#35236b", "fg": "#f3e8ff", "fg_muted": "#9d85c7",
+        "accent": "#8b5cf6", "accent_hover": "#a78bfa", "gold": "#c084fc"
+    },
+    "synthwave_neon": {
+        "bg": "#0d0818", "card_bg": "#160e28", "card_inset": "#22163b",
+        "border": "#422068", "fg": "#fdf2f8", "fg_muted": "#b588c8",
+        "accent": "#f43f5e", "accent_hover": "#fb7185", "gold": "#06b6d4"
+    },
 }
 
 # Avatar categories and presets for profile personalization
 AVATAR_CATEGORIES: Dict[str, str] = {
-    "all": "🌟 الكل (22)",
+    "all": "🌟 الكل (28)",
     "academic": "🎓 أكاديمي وبحثي",
     "medical": "🩺 طبي وصحي",
     "tech": "💻 تقني وهندسي",
@@ -408,6 +480,90 @@ AVATAR_PRESETS: Dict[str, Dict[str, str]] = {
             <circle cx="50" cy="50" r="46" stroke="var(--ab-gold)" stroke-width="3" fill="var(--ab-card-inset)"/>
             <path d="M50 20L56 42L82 54L82 60L56 52L56 70L64 76L64 80L50 77L36 80L36 76L44 70L44 52L18 60L18 54L44 42L50 20Z" fill="var(--ab-accent)" stroke="var(--ab-gold)" stroke-width="2.5" stroke-linejoin="round"/>
         </svg>"""
+    },
+    "morning_sun": {
+        "title": "☀️ شمس الصباح الباكر (طاقة ونشاط)",
+        "category": "humanities",
+        "svg": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="var(--ab-gold)" stroke-width="3" fill="var(--ab-card-inset)"/>
+            <circle cx="50" cy="50" r="18" fill="var(--ab-gold)"/>
+            <path d="M50 18V26M50 74V82M18 50H26M74 50H82M27 27L33 33M67 67L73 73M27 73L33 67M67 33L73 27" stroke="var(--ab-accent)" stroke-width="4" stroke-linecap="round"/>
+        </svg>"""
+    },
+    "night_owl": {
+        "title": "🦉 بومة المذاكرة الليلية (سهر وتركيز)",
+        "category": "academic",
+        "svg": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="var(--ab-gold)" stroke-width="3" fill="var(--ab-card-inset)"/>
+            <path d="M32 30C32 24 38 22 42 28C46 26 54 26 58 28C62 22 68 24 68 30C72 38 72 64 64 74H36C28 64 28 38 32 30Z" fill="var(--ab-card-inset)" stroke="var(--ab-gold)" stroke-width="2.5"/>
+            <circle cx="42" cy="44" r="8" fill="var(--ab-gold)"/>
+            <circle cx="58" cy="44" r="8" fill="var(--ab-gold)"/>
+            <circle cx="42" cy="44" r="4" fill="var(--ab-accent)"/>
+            <circle cx="58" cy="44" r="4" fill="var(--ab-accent)"/>
+            <path d="M47 50L50 56L53 50Z" fill="var(--ab-accent)"/>
+            <path d="M26 76H74" stroke="var(--ab-gold)" stroke-width="3" stroke-linecap="round"/>
+        </svg>"""
+    },
+    "pharmacist": {
+        "title": "💊 صيدلي وخبير دواء",
+        "category": "medical",
+        "svg": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="var(--ab-gold)" stroke-width="3" fill="var(--ab-card-inset)"/>
+            <rect x="28" y="44" width="44" height="24" rx="12" transform="rotate(-35 50 56)" fill="var(--ab-accent)" stroke="var(--ab-gold)" stroke-width="2.5"/>
+            <path d="M38 38L62 74" stroke="var(--ab-card-inset)" stroke-width="2.5"/>
+            <circle cx="68" cy="32" r="3.5" fill="var(--ab-gold)"/>
+            <circle cx="32" cy="68" r="2.5" fill="var(--ab-gold)"/>
+        </svg>"""
+    },
+    "surgeon": {
+        "title": "🔪 جراح ومشرط دقيق",
+        "category": "medical",
+        "svg": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="var(--ab-gold)" stroke-width="3" fill="var(--ab-card-inset)"/>
+            <circle cx="50" cy="42" r="16" fill="var(--ab-gold)"/>
+            <rect x="34" y="42" width="32" height="14" rx="4" fill="var(--ab-card-inset)" stroke="var(--ab-accent)" stroke-width="2"/>
+            <path d="M28 78C28 66 38 60 50 60C62 60 72 66 72 78" fill="var(--ab-accent)"/>
+            <path d="M68 28L78 38L48 68L40 68L40 60L68 28Z" fill="var(--ab-gold)" stroke="var(--ab-card-inset)" stroke-width="1.5"/>
+        </svg>"""
+    },
+    "dentist": {
+        "title": "🦷 طبيب أسنان",
+        "category": "medical",
+        "svg": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="var(--ab-gold)" stroke-width="3" fill="var(--ab-card-inset)"/>
+            <path d="M36 28C28 32 28 44 32 54C34 60 38 74 44 76C48 78 48 64 50 64C52 64 52 78 56 76C62 74 66 60 68 54C72 44 72 32 64 28C58 24 54 30 50 30C46 30 42 24 36 28Z" fill="var(--ab-card-inset)" stroke="var(--ab-gold)" stroke-width="3"/>
+            <path d="M38 38C44 42 56 42 62 38" stroke="var(--ab-accent)" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>"""
+    },
+    "psychologist": {
+        "title": "🧘 باحث في علم النفس",
+        "category": "humanities",
+        "svg": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="var(--ab-gold)" stroke-width="3" fill="var(--ab-card-inset)"/>
+            <path d="M50 26C40 26 34 32 34 42C34 50 40 56 44 60V74H56V60C60 56 66 50 66 42C66 32 60 26 50 26Z" fill="var(--ab-accent)" stroke="var(--ab-gold)" stroke-width="2.5"/>
+            <circle cx="50" cy="42" r="6" fill="var(--ab-gold)"/>
+            <path d="M30 76H70" stroke="var(--ab-gold)" stroke-width="3" stroke-linecap="round"/>
+        </svg>"""
+    },
+    "software_eng": {
+        "title": "💻 مهندس برمجيات وذكاء اصطناعي",
+        "category": "tech",
+        "svg": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="var(--ab-gold)" stroke-width="3" fill="var(--ab-card-inset)"/>
+            <rect x="24" y="28" width="52" height="38" rx="5" fill="var(--ab-card-inset)" stroke="var(--ab-gold)" stroke-width="2.5"/>
+            <path d="M34 44L40 50L34 56M46 56H54" stroke="var(--ab-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M38 66L32 74H68L62 66" stroke="var(--ab-gold)" stroke-width="2.5"/>
+        </svg>"""
+    },
+    "bookworm": {
+        "title": "📖 باحث نهِم وخبير مراجع",
+        "category": "academic",
+        "svg": """<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="var(--ab-gold)" stroke-width="3" fill="var(--ab-card-inset)"/>
+            <path d="M26 68V36C34 34 42 36 50 40C58 36 66 34 74 36V68C66 66 58 68 50 72C42 68 34 66 26 68Z" fill="var(--ab-card-inset)" stroke="var(--ab-gold)" stroke-width="3"/>
+            <path d="M50 40V72" stroke="var(--ab-gold)" stroke-width="2.5"/>
+            <path d="M32 46H44M32 54H42M58 46H70M58 54H68" stroke="var(--ab-accent)" stroke-width="2" stroke-linecap="round"/>
+        </svg>"""
     }
 }
 
@@ -519,6 +675,8 @@ DEFAULTS: Dict[str, Any] = {
     "show_stat_retention": True,
     "show_stat_pace": True,
     "show_stat_time": True,
+    "show_badges": True,
+    "badges_default_collapsed": True,
 }
 
 _CONFIG_CACHE = None

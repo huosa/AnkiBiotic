@@ -8,6 +8,7 @@ AnkiBiotic - Main Entry Point & Hook Integrations
 from typing import Any
 from aqt import mw, gui_hooks
 from aqt.deckbrowser import DeckBrowser
+from aqt.overview import Overview
 from aqt.qt import QAction
 
 from .config import load_config
@@ -18,7 +19,7 @@ def on_webview_cmd(handled: tuple, cmd: str, context: object) -> tuple:
     """
     Handle JavaScript pycmd events triggered from AnkiBiotic webview.
     """
-    if not isinstance(context, DeckBrowser):
+    if not isinstance(context, (DeckBrowser, Overview)):
         return handled
 
     # --- Settings ---
@@ -63,6 +64,58 @@ def on_webview_cmd(handled: tuple, cmd: str, context: object) -> tuple:
                 mw.sync()
         except Exception as e:
             print(f"[AnkiBiotic] Sync error: {e}")
+        return (True, None)
+
+    # --- Create Deck ---
+    if cmd in ("create", "createDeck", "ankibiotic:create_deck", "new_deck"):
+        try:
+            if hasattr(context, "_on_create"):
+                context._on_create()
+            elif hasattr(mw, "deckBrowser") and hasattr(mw.deckBrowser, "_on_create"):
+                mw.deckBrowser._on_create()
+            elif hasattr(mw, "onAddDeck"):
+                mw.onAddDeck()
+            else:
+                from aqt.operations.deck import add_deck_dialog
+                add_deck_dialog(parent=mw).run_in_background()
+        except Exception as e:
+            try:
+                from aqt.operations.deck import add_deck_dialog
+                add_deck_dialog(parent=mw)
+            except Exception as ex2:
+                print(f"[AnkiBiotic] Create deck error: {e}, {ex2}")
+        return (True, None)
+
+    # --- Import File ---
+    if cmd in ("import", "ankibiotic:import_file", "import_file"):
+        try:
+            if hasattr(mw, "onImport"):
+                mw.onImport()
+            elif hasattr(context, "mw") and hasattr(context.mw, "onImport"):
+                context.mw.onImport()
+            elif hasattr(context, "_onImport"):
+                context._onImport()
+        except Exception as e:
+            print(f"[AnkiBiotic] Import file error: {e}")
+        return (True, None)
+
+    # --- Get Shared Decks ---
+    if cmd in ("shared", "getShared", "ankibiotic:get_shared", "get_shared"):
+        try:
+            if hasattr(context, "_onShared"):
+                context._onShared()
+            elif hasattr(mw, "deckBrowser") and hasattr(mw.deckBrowser, "_onShared"):
+                mw.deckBrowser._onShared()
+            else:
+                import aqt
+                from aqt.utils import openLink
+                openLink(getattr(aqt, "appShared", "https://ankiweb.net/shared/") + "decks/")
+        except Exception as e:
+            try:
+                from aqt.utils import openLink
+                openLink("https://ankiweb.net/shared/decks/")
+            except Exception as ex2:
+                print(f"[AnkiBiotic] Get shared error: {e}, {ex2}")
         return (True, None)
 
     # --- Open Deck (study overview) ---
@@ -459,7 +512,12 @@ def enable_ankibiotic():
         cfg = load_config()
         if cfg.get("enabled", True):
             DeckBrowser._renderPage = render_ankibiotic_deck_browser
-            print("[AnkiBiotic] Initialized successfully. DeckBrowser replaced.")
+            try:
+                from .congrats_renderer import render_ankibiotic_congrats
+                Overview._show_finished_screen = render_ankibiotic_congrats
+            except Exception as ex_ov:
+                print(f"[AnkiBiotic] Overview finished screen hook error: {ex_ov}")
+            print("[AnkiBiotic] Initialized successfully. DeckBrowser and Victory Screen active.")
 
             patch_bottom_web()
             hide_anki_bottom_bar()

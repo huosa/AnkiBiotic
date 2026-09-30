@@ -190,37 +190,50 @@ def render_ankibiotic_deck_browser(self: DeckBrowser, reuse: bool = False) -> No
                 </section>
         """
 
-    # Achievements & Badges Strip
-    badges_list = compute_badges(stats, total_reviews_ever=heatmap_data.get("total_reviews", 0), lang=lang)
-    unlocked_count = sum(1 for b in badges_list if b["unlocked"])
-    badges_items = []
-    for b in badges_list:
-        cls = "badge-item-unlocked" if b["unlocked"] else "badge-item-locked"
-        lock_icon = "" if b["unlocked"] else '<span class="lock-overlay">🔒</span>'
-        tooltip = f"{b['title']} - {b['desc']} ({b['progress_str']})"
-        badges_items.append(f"""
-            <div class="badge-mini-item {cls}" title="{html.escape(tooltip)}">
-                <span class="badge-mini-icon">{b['icon']}</span>
-                {lock_icon}
-                <span class="badge-mini-title">{html.escape(b['title'])}</span>
-            </div>
-        """)
+    # Achievements & Badges Strip (Collapsible & Configurable)
+    badges_strip_html = ""
+    if cfg.get("show_badges", True):
+        badges_list = compute_badges(stats, total_reviews_ever=heatmap_data.get("total_reviews", 0), lang=lang)
+        unlocked_count = sum(1 for b in badges_list if b["unlocked"])
+        badges_items = []
+        for b in badges_list:
+            cls = "badge-item-unlocked" if b["unlocked"] else "badge-item-locked"
+            lock_icon = "" if b["unlocked"] else '<span class="lock-overlay">🔒</span>'
+            tooltip = f"{b['title']} - {b['desc']} ({b['progress_str']})"
+            badges_items.append(f"""
+                <div class="badge-mini-item {cls}" title="{html.escape(tooltip)}">
+                    <span class="badge-mini-icon">{b['icon']}</span>
+                    {lock_icon}
+                    <span class="badge-mini-title">{html.escape(b['title'])}</span>
+                </div>
+            """)
 
-    badges_strip_html = f"""
-                <!-- Badges & Achievements Strip -->
-                <section class="badges-strip-card">
-                    <div class="badges-header">
+        collapsed_cls = "collapsed" if cfg.get("badges_default_collapsed", True) else ""
+        badges_strip_html = f"""
+                <!-- Badges & Achievements Strip (Collapsible & Under Heatmap) -->
+                <section class="badges-strip-card collapsible-badges {collapsed_cls}" id="ankibiotic-badges-card">
+                    <div class="badges-header" onclick="AnkiBiotic.toggleBadges()" title="{t.get('badges_toggle_hint', 'انقر للطي / العرض ▾')}">
                         <div class="badges-title">
+                            <span class="badges-chevron-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </span>
                             <span>🏆 {t['badges_title']}</span>
                             <span class="badges-count-pill">{unlocked_count}/{len(badges_list)} {t['badges_unlocked']}</span>
                         </div>
-                        <button class="badges-config-btn" onclick="pycmd('openAnkiBioticSettings')" title="{t['settings']}">⚙️</button>
+                        <div class="badges-header-actions">
+                            <span class="badges-toggle-label">{t.get('badges_toggle_hint', 'انقر للطي / العرض ▾')}</span>
+                            <button class="badges-config-btn" onclick="event.stopPropagation(); pycmd('openAnkiBioticSettings')" title="{t['settings']}">⚙️</button>
+                        </div>
                     </div>
-                    <div class="badges-grid-mini">
-                        {''.join(badges_items)}
+                    <div class="badges-collapsible-body" id="ankibiotic-badges-body">
+                        <div class="badges-grid-mini">
+                            {''.join(badges_items)}
+                        </div>
                     </div>
                 </section>
-    """
+        """
 
     # Configurable Live Metrics
     stat_cards = []
@@ -424,6 +437,22 @@ def render_ankibiotic_deck_browser(self: DeckBrowser, reuse: bool = False) -> No
                     <div class="deck-scroll-list" id="ankibiotic-deck-tree">
                         {deck_tree_html}
                     </div>
+
+                    <!-- Deck Actions Footer (Create, Import, Get Shared) -->
+                    <div class="deck-actions-footer">
+                        <button class="deck-action-btn" onclick="pycmd('ankibiotic:create_deck')" title="{t['deck_create']}">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            <span>{t['deck_create']}</span>
+                        </button>
+                        <button class="deck-action-btn" onclick="pycmd('ankibiotic:import_file')" title="{t['deck_import']}">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>{t['deck_import']}</span>
+                        </button>
+                        <button class="deck-action-btn" onclick="pycmd('ankibiotic:get_shared')" title="{t['deck_get_shared']}">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span>{t['deck_get_shared']}</span>
+                        </button>
+                    </div>
                 </div>
 
             </aside>
@@ -448,8 +477,6 @@ def render_ankibiotic_deck_browser(self: DeckBrowser, reuse: bool = False) -> No
                 {goal_html}
 
                 {stats_grid_html}
-
-                {badges_strip_html}
 
                 <!-- 52-Week Heatmap Card -->
                 <section class="heatmap-card">
@@ -504,6 +531,8 @@ def render_ankibiotic_deck_browser(self: DeckBrowser, reuse: bool = False) -> No
                         {streak_footer_html}
                     </div>
                 </section>
+
+                {badges_strip_html}
 
             </main>
 

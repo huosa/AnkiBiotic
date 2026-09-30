@@ -26,6 +26,9 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "streak_pill": "أيام متواصلة",
         "no_decks": "لا توجد رزم متوفرة",
         "deck_opts": "خيارات الرزمة",
+        "deck_create": "رزمة جديدة",
+        "deck_import": "استيراد ملف",
+        "deck_get_shared": "رزم مشتركة",
 
         # Live Metrics
         "stat_studied_title": "البطاقات المراجعة اليوم",
@@ -80,6 +83,9 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         # Achievements & Badges
         "badges_title": "الشارات والإنجازات",
         "badges_unlocked": "محققة",
+        "badges_toggle_hint": "انقر للطي / العرض ▾",
+        "show_badges_setting": "إظهار قسم الشارات والإنجازات في الصفحة الرئيسية",
+        "badges_default_collapsed_setting": "طي قسم الشارات والإنجازات افتراضياً",
         "badge_streak_3": "شعلة البداية",
         "badge_streak_3_desc": "استمرارية لـ 3 أيام متواصلة",
         "badge_streak_7": "بطل الأسبوع",
@@ -137,6 +143,27 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "badge_med_culture_negative": "مزرعة سالبة (تعقيم كامل)",
         "badge_med_culture_negative_desc": "القضاء على العدوى بتصفير الرزم بالكامل (15+ بطاقة اليوم)",
 
+        # Deck Finished / Victory Screen (شاشة انتهاء الرزمة)
+        "congrats_title": "تهانينا! اكتملت مراجعة الرزمة بنجاح 🎉",
+        "congrats_subtitle": "تم تثبيت معلومات الرزمة وتصفير جميع البطاقات المستحقة لليوم",
+        "congrats_stat_studied": "كروت الجلسة",
+        "congrats_stat_retention": "دقة الجلسة",
+        "congrats_stat_time": "وقت الجلسة",
+        "congrats_stat_pace": "السرعة",
+        "congrats_forecast_title": "المراجعة القادمة للرزمة",
+        "congrats_forecast_cards": "{count} بطاقة مستحقة غداً ⏳",
+        "congrats_forecast_clear": "لا توجد بطاقات مستحقة غداً! الرزمة مستقرة تماماً 🌟",
+        "congrats_goal_title": "هدف اليوم الإجمالي",
+        "congrats_goal_progress": "أنجزت {studied} من {goal} بطاقة ({percent}%)",
+        "congrats_goal_done": "🎉 تم تحقيق هدف اليوم بالكامل! عمل بطولي",
+        "congrats_goal_remain": "متبقي {remain} بطاقة على هدف اليوم 🚀",
+        "congrats_memory_title": "مقاومة منحنى النسيان (Memory Consolidation)",
+        "congrats_memory_boost": "+{boost}% تثبيت في الذاكرة طويلة المدى 🧠",
+        "congrats_memory_desc": "تم تثبيت المفاهيم السريرية ومقاومة منحنى إبنجهاوس للنسيان بنجاح",
+        "congrats_btn_dashboard": "🏠 العودة للوحة التحكم",
+        "congrats_btn_custom_study": "📚 دراسة مخصصة",
+        "congrats_btn_options": "⚙️ خيارات الرزمة",
+
         # Settings Dialog Strings
         "settings_dialog_title": "⚙️ إعدادات وتخصيص AnkiBiotic",
         "settings_banner_title": "🎨 لوحة تحكم وإعدادات AnkiBiotic",
@@ -171,6 +198,9 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "streak_pill": "day streak",
         "no_decks": "No decks available",
         "deck_opts": "Deck Options",
+        "deck_create": "Create Deck",
+        "deck_import": "Import File",
+        "deck_get_shared": "Get Shared",
 
         # Live Metrics
         "stat_studied_title": "Cards Studied Today",
@@ -225,6 +255,9 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         # Achievements & Badges
         "badges_title": "Achievements & Badges",
         "badges_unlocked": "Unlocked",
+        "badges_toggle_hint": "Click to toggle ▾",
+        "show_badges_setting": "Show Badges & Achievements in Dashboard",
+        "badges_default_collapsed_setting": "Collapse Badges section by default",
         "badge_streak_3": "Flame Starter",
         "badge_streak_3_desc": "3-day continuous study streak",
         "badge_streak_7": "Weekly Champion",
@@ -281,6 +314,27 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "badge_med_vaccine_desc": "Knowledge immunity with 5 continuous study days",
         "badge_med_culture_negative": "Culture Negative (Sterile)",
         "badge_med_culture_negative_desc": "Eradicated all due cards for the day (15+ cards studied)",
+
+        # Deck Finished / Victory Screen
+        "congrats_title": "Congratulations! Deck Completed 🎉",
+        "congrats_subtitle": "All due cards cleared and consolidated for today",
+        "congrats_stat_studied": "Session Cards",
+        "congrats_stat_retention": "Session Accuracy",
+        "congrats_stat_time": "Session Time",
+        "congrats_stat_pace": "Pace",
+        "congrats_forecast_title": "Next Review Forecast",
+        "congrats_forecast_cards": "{count} cards due tomorrow ⏳",
+        "congrats_forecast_clear": "All clear tomorrow! Deck is well consolidated 🌟",
+        "congrats_goal_title": "Overall Daily Goal",
+        "congrats_goal_progress": "{studied} of {goal} cards completed ({percent}%)",
+        "congrats_goal_done": "🎉 Today's goal fully achieved! Outstanding job",
+        "congrats_goal_remain": "{remain} cards remaining to hit today's goal 🚀",
+        "congrats_memory_title": "Memory Consolidation (Forgetting Curve Resistance)",
+        "congrats_memory_boost": "+{boost}% Long-Term Memory Resistance 🧠",
+        "congrats_memory_desc": "Your review session successfully countered the forgetting curve and strengthened synapses",
+        "congrats_btn_dashboard": "🏠 Return to Dashboard",
+        "congrats_btn_custom_study": "📚 Custom Study",
+        "congrats_btn_options": "⚙️ Deck Options",
 
         # Settings Dialog Strings
         "settings_dialog_title": "⚙️ AnkiBiotic Settings & Customization",

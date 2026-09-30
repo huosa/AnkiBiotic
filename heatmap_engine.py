@@ -33,10 +33,14 @@ def get_ankibiotic_heatmap_data() -> Dict[str, Any]:
 
     try:
         col = mw.col
-        # Rollover hour offset (e.g. 4am rollover means reviews before 4am count for previous day)
         try:
-            rollover_hours = col.conf.get("rollover", 4)
+            if hasattr(col, "get_config"):
+                rollover_hours = col.get_config("rollover", 4)
+            else:
+                rollover_hours = col.conf.get("rollover", 4)
         except Exception:
+            rollover_hours = 4
+        if rollover_hours is None:
             rollover_hours = 4
         rollover_sec = int(rollover_hours * 3600)
 

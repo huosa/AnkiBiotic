@@ -1,6 +1,6 @@
 {
     "enabled": true,
-    "theme": "arctic_frost",
+    "theme": "ocean_deep",
     "language": "ar",
     "daily_goal_enabled": true,
     "daily_goal_cards": 100,
@@ -33,7 +33,7 @@
     "font_family": "'Cairo', 'Segoe UI', Tahoma, sans-serif",
     "user_name": "المستخدم",
     "profile_subtitle": "طالب علم ومراجع متميز",
-    "avatar_type": "caduceus_student",
+    "avatar_type": "default",
     "custom_avatar_path": "",
     "profile_pic_svg": "",
     "default_heatmap_view": "year",
@@ -42,7 +42,9 @@
     "show_quick_nav": true,
     "decks_default_collapsed": false,
     "show_stat_studied": true,
-    "show_stat_retention": false,
+    "show_stat_retention": true,
     "show_stat_pace": true,
-    "show_stat_time": true
+    "show_stat_time": true,
+    "show_badges": true,
+    "badges_default_collapsed": true
 }

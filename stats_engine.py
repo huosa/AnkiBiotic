@@ -34,7 +34,10 @@ def get_stats_data(lang: str = "ar") -> Dict[str, Any]:
         }
 
     col = mw.col
-    day_cutoff_ms = (col.sched.day_cutoff - 86400) * 1000
+    day_cutoff = col.sched.day_cutoff
+    if callable(day_cutoff):
+        day_cutoff = day_cutoff()
+    day_cutoff_ms = (int(day_cutoff) - 86400) * 1000
 
     # 1. Reviews today: Count & Time
     # type IN (0,1,2,3) = learn, review, relearn, cram
@@ -87,7 +90,7 @@ def get_stats_data(lang: str = "ar") -> Dict[str, Any]:
         counts = col.db.first(
             """
             SELECT 
-                sum(case when queue = 1 then 1 else 0 end),
+                sum(case when queue IN (1, 3) then 1 else 0 end),
                 sum(case when queue = 2 and due <= ? then 1 else 0 end),
                 sum(case when queue = 0 then 1 else 0 end)
             FROM cards
@@ -121,8 +124,13 @@ def compute_review_streak() -> int:
     try:
         col = mw.col
         try:
-            rollover_hours = col.conf.get("rollover", 4)
+            if hasattr(col, "get_config"):
+                rollover_hours = col.get_config("rollover", 4)
+            else:
+                rollover_hours = col.conf.get("rollover", 4)
         except Exception:
+            rollover_hours = 4
+        if rollover_hours is None:
             rollover_hours = 4
         rollover_sec = int(rollover_hours * 3600)
 
@@ -269,7 +277,10 @@ def compute_badges(stats: Dict[str, Any], total_reviews_ever: int = 0, lang: str
     night_owl_unlocked = False
     if mw and hasattr(mw, "col") and mw.col:
         try:
-            day_cutoff_ms = (mw.col.sched.day_cutoff - 86400) * 1000
+            day_cutoff = mw.col.sched.day_cutoff
+            if callable(day_cutoff):
+                day_cutoff = day_cutoff()
+            day_cutoff_ms = (int(day_cutoff) - 86400) * 1000
             hours = mw.col.db.list(
                 "SELECT CAST(strftime('%H', (id / 1000), 'unixepoch', 'localtime') AS INTEGER) "
                 "FROM revlog WHERE id > ? AND type IN (0,1,2,3)",
